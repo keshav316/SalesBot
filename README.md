@@ -4,7 +4,7 @@ SalesBot is a hybrid RAG (Dense AstraDB + Sparse BM25 Keyword Search) AI Sales A
 
 ## Prerequisites
 
-- **Python**: version 3.10+ (tested on Python 3.12/3.13)
+- **Python**: version 3.11
 - **Conda** (recommended) or **pip**
 - **AstraDB Account** (for vector storage)
 - **Groq Cloud API Key** (for Llama 3.3 model execution)
