@@ -1,8 +1,7 @@
 import os
-<<<<<<< HEAD
+
 import json
-=======
->>>>>>> af8b08ecffec43e5dc1c5577f5759f7b6403b00a
+
 import pickle
 from pathlib import Path
 
@@ -14,25 +13,22 @@ from langchain_astradb import AstraDBVectorStore
 from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from langchain_community.retrievers import BM25Retriever
 from langchain.retrievers import EnsembleRetriever
-<<<<<<< HEAD
+
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader
 import pandas as pd
 import docx
-=======
->>>>>>> af8b08ecffec43e5dc1c5577f5759f7b6403b00a
 
 load_dotenv()  # reads .env from the current working directory
 
 COLLECTION_NAME = "sales_products"          # AstraDB collection created by ingest.py
 EMBEDDING_MODEL = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
 BM25_CACHE = Path("bm25_corpus.pkl")        # local chunk cache created by ingest.py
-<<<<<<< HEAD
+
 DATA_DIR = Path("Data")
 METADATA_FILE = Path("ingested_metadata.json")
-=======
->>>>>>> af8b08ecffec43e5dc1c5577f5759f7b6403b00a
+
 
 
 PROMPT_TEMPLATE = ChatPromptTemplate.from_messages([
@@ -81,7 +77,7 @@ Product Information:
 _state = {"initialized": False}
 
 
-<<<<<<< HEAD
+
 def load_file(file_path: Path) -> list[Document]:
     ext = file_path.suffix.lower()
     if ext == ".pdf":
@@ -278,8 +274,7 @@ def sync_data_folder(vstore):
             print(f"Error saving metadata file: {e}")
 
 
-=======
->>>>>>> af8b08ecffec43e5dc1c5577f5759f7b6403b00a
+
 def _initialize():
     """One-time setup: LLM, memory, and the hybrid (AstraDB + BM25) retriever."""
     if _state["initialized"]:
@@ -311,7 +306,7 @@ def _initialize():
         api_endpoint=astra_db_url,
         token=astra_db_token,
     )
-<<<<<<< HEAD
+
 
     # Sync Data/ folder with databases (AstraDB & BM25)
     sync_data_folder(vstore)
@@ -326,7 +321,7 @@ def _initialize():
     else:
         with open(BM25_CACHE, "rb") as f:
             all_chunks = pickle.load(f)
-=======
+
     dense_retriever = vstore.as_retriever(search_kwargs={"k": 5})
 
     # 🔹 BM25 — sparse/keyword search, built from the same chunks ingest.py embedded
@@ -336,7 +331,7 @@ def _initialize():
         )
     with open(BM25_CACHE, "rb") as f:
         all_chunks = pickle.load(f)
->>>>>>> af8b08ecffec43e5dc1c5577f5759f7b6403b00a
+
 
     bm25_retriever = BM25Retriever.from_documents(all_chunks)
     bm25_retriever.k = 5
@@ -390,7 +385,7 @@ def getAnswer(question: str) -> str:
     return response
 
 
-<<<<<<< HEAD
+
 def getAnswerStream(question: str):
     _initialize()
 
@@ -428,8 +423,7 @@ def getAnswerStream(question: str):
     memory.save_context({"input": question}, {"output": response})
 
 
-=======
->>>>>>> af8b08ecffec43e5dc1c5577f5759f7b6403b00a
+
 # 🔹 CLI loop for testing
 if __name__ == "__main__":
     print("🤖 Groq Chatbot (Hybrid RAG + AstraDB) is ready! Type 'exit' to quit.")
