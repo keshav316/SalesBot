@@ -1,3 +1,0 @@
-FROM llama2
-PARAMETER temperature 0.9
-ADAPTER my-chatbot-lora
