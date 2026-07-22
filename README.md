@@ -18,7 +18,7 @@ SalesBot is a hybrid RAG (Dense AstraDB + Sparse BM25 Keyword Search) AI Sales A
 
 1. Create a Conda environment and install Python:
    ```bash
-   conda create -n salesBot python=3.12 -y
+   conda create -n salesBot python=3.11 -y
    ```
 2. Activate the environment:
    ```bash
